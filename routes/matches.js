@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Match = require('../models/Match');
+const verify = require('./verifyToken');
 
 //GetAll matches
 router.get('/', async (req, res) => {
@@ -23,7 +24,7 @@ router.get('/:matchId', async (req, res) => {
 });
 
 //Post match
-router.post('/', async (req, res) => {
+router.post('/', verify, async (req, res) => {
   const match = new Match({
     homeTeam: req.body.homeTeam,
     awayTeam: req.body.awayTeam,
@@ -40,7 +41,7 @@ router.post('/', async (req, res) => {
 });
 
 //Delete match
-router.delete('/:matchId', async (req,res) => {
+router.delete('/:matchId', verify, async (req,res) => {
   try {
     const match = await Match.remove({_id: req.params.matchId});
     res.status(200).json(match);
@@ -50,7 +51,7 @@ router.delete('/:matchId', async (req,res) => {
 });
 
 //Update match
-router.patch('/:matchId', async (req, res) => {
+router.patch('/:matchId', verify, async (req, res) => {
   try {
     const match = await Match.updateOne({_id: req.params.matchId}, 
       {$set: {

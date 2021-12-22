@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Player = require('../models/Player');
+const verify = require('./verifyToken');
 
 //GetAll players
 router.get('/', async (req, res) => {
@@ -23,7 +24,7 @@ router.get('/:playerId', async (req, res) => {
 });
 
 //Post player
-router.post('/', async (req, res) => {
+router.post('/', verify, async (req, res) => {
   const player = new Player({
     name: req.body.name,
     givenName: req.body.givenName,
@@ -42,7 +43,7 @@ router.post('/', async (req, res) => {
 });
 
 //Delete player
-router.delete('/:playerId', async (req,res) => {
+router.delete('/:playerId', verify, async (req,res) => {
   try {
     const player = await Player.remove({_id: req.params.playerId});
     res.status(200).json(player);
@@ -52,7 +53,7 @@ router.delete('/:playerId', async (req,res) => {
 });
 
 //Update player
-router.patch('/:playerId', async (req, res) => {
+router.patch('/:playerId', verify, async (req, res) => {
   try {
     const player = await Player.updateOne({_id: req.params.playerId}, 
       {$set: {

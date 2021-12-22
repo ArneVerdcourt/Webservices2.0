@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Team = require('../models/Team');
+const verify = require('./verifyToken');
 
 //GetAll teams
 router.get('/', async (req, res) => {
@@ -23,7 +24,7 @@ router.get('/:teamId', async (req, res) => {
 });
 
 //Post team
-router.post('/', async (req, res) => {
+router.post('/', verify, async (req, res) => {
   const team = new Team({
     name: req.body.name,
     players: req.body.players
@@ -37,7 +38,7 @@ router.post('/', async (req, res) => {
 });
 
 //Delete team
-router.delete('/:teamId', async (req,res) => {
+router.delete('/:teamId', verify, async (req,res) => {
   try {
     const team = await Team.remove({_id: req.params.teamId});
     res.status(200).json(team);
@@ -47,7 +48,7 @@ router.delete('/:teamId', async (req,res) => {
 });
 
 //Update team
-router.patch('/:teamId', async (req, res) => {
+router.patch('/:teamId', verify, async (req, res) => {
   try {
     const team = await Team.updateOne({_id: req.params.teamId}, 
       {$set: {

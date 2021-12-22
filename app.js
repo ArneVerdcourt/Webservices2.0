@@ -15,6 +15,7 @@ const teamsRoute = require('./routes/teams');
 const matchesRoute = require('./routes/matches');
 const authRoute = require('./routes/auth');
 
+//Route Middlewares
 app.use('/players', playersRoute);
 app.use('/teams', teamsRoute);
 app.use('/matches', matchesRoute);
