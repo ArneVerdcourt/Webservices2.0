@@ -6,10 +6,10 @@ const TeamSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  players: [{
-    type: Player,
+  players: {
+    type: [Player],
     required: true
-  }]
+  }
 });
 
 module.exports = mongoose.model('Teams', TeamSchema);
