@@ -39,7 +39,6 @@ router.post('/', async (req, res) => {
   } catch(err) {
     res.json({message: err});
   }
-  
 });
 
 //Delete player
@@ -70,6 +69,6 @@ router.patch('/:playerId', async (req, res) => {
   } catch(err) {
     res.json({message: err});
   }
-})
+});
 
 module.exports = router;
