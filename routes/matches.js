@@ -6,9 +6,9 @@ const Match = require('../models/Match');
 router.get('/', async (req, res) => {
   try {
     const matches = await Match.find();
-    res.json(teams);
+    res.status(200).json(teams);
   } catch(err) {
-    res.json({message: err});
+    res.status(400).json({message: err});
   }
 });
 
@@ -16,9 +16,9 @@ router.get('/', async (req, res) => {
 router.get('/:matchId', async (req, res) => {
   try {
     const match = await Match.findById(req.params.matchId);
-    res.json(match);
+    res.status(200).json(match);
   } catch(err) {
-    res.json({message: err});
+    res.status(400).json({message: err});
   }
 });
 
@@ -33,9 +33,9 @@ router.post('/', async (req, res) => {
   });
   try {
     const savedMatch = await match.save();
-    res.json(savedMatch);
+    res.status(200).json(savedMatch);
   } catch(err) {
-    res.json({message: err});
+    res.status(400).json({message: err});
   }
 });
 
@@ -43,9 +43,9 @@ router.post('/', async (req, res) => {
 router.delete('/:matchId', async (req,res) => {
   try {
     const match = await Match.remove({_id: req.params.matchId});
-    res.json(match);
+    res.status(200).json(match);
   } catch(err) {
-    res.json({message: err});
+    res.status(400).json({message: err});
   }
 });
 
@@ -61,9 +61,9 @@ router.patch('/:matchId', async (req, res) => {
         referees: req.body.referees
       }
     });
-    res.json(match);
+    res.status(200).json(match);
   } catch(err) {
-    res.json({message: err});
+    res.status(400).json({message: err});
   }
 });
 

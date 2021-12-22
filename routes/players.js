@@ -6,9 +6,9 @@ const Player = require('../models/Player');
 router.get('/', async (req, res) => {
   try {
     const players = await Player.find();
-    res.json(players);
+    res.status(200).json(players);
   } catch(err) {
-    res.json({message: err});
+    res.status(400).json({message: err});
   }
 });
 
@@ -16,9 +16,9 @@ router.get('/', async (req, res) => {
 router.get('/:playerId', async (req, res) => {
   try {
     const player = await Player.findById(req.params.playerId);
-    res.json(player);
+    res.status(200).json(player);
   } catch(err) {
-    res.json({message: err});
+    res.status(400).json({message: err});
   }
 });
 
@@ -35,9 +35,9 @@ router.post('/', async (req, res) => {
   });
   try {
     const savedPlayer = await player.save();
-    res.json(savedPlayer);
+    res.status(200).json(savedPlayer);
   } catch(err) {
-    res.json({message: err});
+    res.status(400).json({message: err});
   }
 });
 
@@ -45,9 +45,9 @@ router.post('/', async (req, res) => {
 router.delete('/:playerId', async (req,res) => {
   try {
     const player = await Player.remove({_id: req.params.playerId});
-    res.json(player);
+    res.status(200).json(player);
   } catch(err) {
-    res.json({message: err});
+    res.status(400).json({message: err});
   }
 });
 
@@ -65,9 +65,9 @@ router.patch('/:playerId', async (req, res) => {
         position: req.body.position
       }
     });
-    res.json(player);
+    res.status(200).json(player);
   } catch(err) {
-    res.json({message: err});
+    res.status(400).json({message: err});
   }
 });
 

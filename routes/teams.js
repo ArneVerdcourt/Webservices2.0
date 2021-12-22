@@ -6,9 +6,9 @@ const Team = require('../models/Team');
 router.get('/', async (req, res) => {
   try {
     const teams = await Team.find();
-    res.json(teams);
+    res.status(200).json(teams);
   } catch(err) {
-    res.json({message: err});
+    res.status(400).json({message: err});
   }
 });
 
@@ -16,9 +16,9 @@ router.get('/', async (req, res) => {
 router.get('/:teamId', async (req, res) => {
   try {
     const team = await Team.findById(req.params.teamId);
-    res.json(team);
+    res.status(200).json(team);
   } catch(err) {
-    res.json({message: err});
+    res.status(400).json({message: err});
   }
 });
 
@@ -30,9 +30,9 @@ router.post('/', async (req, res) => {
   });
   try {
     const savedTeam = await team.save();
-    res.json(savedTeam);
+    res.status(200).json(savedTeam);
   } catch(err) {
-    res.json({message: err});
+    res.status(400).json({message: err});
   }
 });
 
@@ -40,9 +40,9 @@ router.post('/', async (req, res) => {
 router.delete('/:teamId', async (req,res) => {
   try {
     const team = await Team.remove({_id: req.params.teamId});
-    res.json(team);
+    res.status(200).json(team);
   } catch(err) {
-    res.json({message: err});
+    res.status(400).json({message: err});
   }
 });
 
@@ -55,9 +55,9 @@ router.patch('/:teamId', async (req, res) => {
         players: req.body.players
       }
     });
-    res.json(team);
+    res.status(200).json(team);
   } catch(err) {
-    res.json({message: err});
+    res.status(400).json({message: err});
   }
 });
 
