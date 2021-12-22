@@ -20,7 +20,7 @@ router.get('/:playerId', async (req, res) => {
   } catch(err) {
     res.json({message: err});
   }
-})
+});
 
 //Post player
 router.post('/', async (req, res) => {
@@ -41,5 +41,35 @@ router.post('/', async (req, res) => {
   }
   
 });
+
+//Delete player
+router.delete('/:playerId', async (req,res) => {
+  try {
+    const player = await Player.remove({_id: req.params.playerId});
+    res.json(player);
+  } catch(err) {
+    res.json({message: err});
+  }
+});
+
+//Update player
+router.patch('/:playerId', async (req, res) => {
+  try {
+    const player = await Player.updateOne({_id: req.params.playerId}, 
+      {$set: {
+        name: req.body.name,
+        givenName: req.body.givenName,
+        playerNumber: req.body.playerNumber,
+        goals: req.body.goals,
+        assists: req.body.assists,
+        matchesPlayed: req.body.matchesPlayed,
+        position: req.body.position
+      }
+    });
+    res.json(player);
+  } catch(err) {
+    res.json({message: err});
+  }
+})
 
 module.exports = router;
