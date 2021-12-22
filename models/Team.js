@@ -7,8 +7,7 @@ const TeamSchema = mongoose.Schema({
     required: true
   },
   players: {
-    type: [Player],
-    required: true
+    type: []
   }
 });
 

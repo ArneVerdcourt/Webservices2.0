@@ -1,7 +1,6 @@
 const Joi = require('@hapi/joi');
 const res = require('express/lib/response');
 const { model } = require('mongoose');
-const {registerValidation} = require('./validation')
 
 //Register validation
 const registerValidation = (data) => {

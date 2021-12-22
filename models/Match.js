@@ -3,11 +3,11 @@ const Team = require('./Team');
 
 const MatchSchema = mongoose.Schema({
   homeTeam: {
-    type: Team,
+    type: String,
     required: true
   },
   awayTeam: {
-    type: Team,
+    type: String,
     required: true
   },
   datePlayed: {
